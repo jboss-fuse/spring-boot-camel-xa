@@ -7,6 +7,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: CLUSTER_RECOVERY_ENABLED
+        - value: true
         - name: CLUSTER_BASE_DIR
           value: /var/transaction/data
         - name: CLUSTER_NODENAME
@@ -22,4 +24,4 @@ spec:
       volumes:
       - name: ${project.artifactId}-data
         persistentVolumeClaim:
-          claimName: ${project.artifactId}
+          claimName: camel-transaction-log-pvc

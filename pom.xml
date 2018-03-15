@@ -33,7 +33,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <camel.version>2.20.0</camel.version>
-        <snowdrop-narayana.version>0.0.1-SNAPSHOT</snowdrop-narayana.version>
+        <snowdrop-narayana.version>0.0.2</snowdrop-narayana.version>
         <spring-boot.version>1.5.8.RELEASE</spring-boot.version>
 
         <!-- versions of Maven plugins -->
