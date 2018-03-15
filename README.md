@@ -134,7 +134,6 @@ curl -w "\n" http://$NARAYANA_HOST/api/
 This message produces an exception at the end of the route, so that the transaction is always rolled back.
 
 You should **not** find any trace of the message in the `audit_log` table.
-If you check the application log, you'll find out that the message has been sent to the dead letter queue.
 
 #### Unsafe system crash
 
