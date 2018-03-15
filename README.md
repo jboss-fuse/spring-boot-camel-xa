@@ -80,6 +80,20 @@ Scale it up to the desired number of replicas:
 
     oc scale statefulset spring-boot-camel-xa --replicas 3
 
+### Caveats
+
+The pod name is used as transaction manager id (`spring.jta.transaction-manager-id` property). The current implementation also 
+limits the length of transaction manager ids.
+So, you must be aware of the following:
+
+- The name of the statefulset is an identifier for the transaction system, so it must not be changed
+- You should name the statefulset so that all of its pod names have length **lower than or equal to 23 characters**
+
+Pod names are created by Openshift using the convention: `<statefulset-name>-0`, `<statefulset-name>-1` and so on.
+
+Note that Narayana does its best to avoid having multiple recovery managers with the same id, so when the pod name is longer than the 
+limit, the *last 23 bytes* are taken as transaction manager id (after stripping some characters like `-`).
+
 ### Using the Quickstart
 
 Once the quickstart is running you can get the base service URL using the following command:
