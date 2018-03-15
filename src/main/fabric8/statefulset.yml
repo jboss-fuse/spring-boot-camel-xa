@@ -1,0 +1,25 @@
+spec:
+  podManagementPolicy: Parallel
+  updateStrategy:
+      type: RollingUpdate
+  serviceName: ${project.artifactId}-headless
+  template:
+    spec:
+      containers:
+      - env:
+        - name: CLUSTER_BASE_DIR
+          value: /var/transaction/data
+        - name: CLUSTER_NODENAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        volumeMounts:
+        - mountPath: /var/transaction/data
+          name: ${project.artifactId}-data
+      serviceAccountName: spring-boot-camel-xa
+      terminationGracePeriodSeconds: 180
+      volumes:
+      - name: ${project.artifactId}-data
+        persistentVolumeClaim:
+          claimName: ${project.artifactId}

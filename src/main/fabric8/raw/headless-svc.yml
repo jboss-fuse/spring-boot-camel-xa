@@ -1,0 +1,19 @@
+apiVersion: v1
+metadata:
+  labels:
+    app: ${project.artifactId}
+    group: ${project.groupId}
+    version: ${project.version}
+    provider: fabric8
+  name: ${project.artifactId}-headless
+spec:
+  clusterIP: None
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: ${project.artifactId}
+    group: ${project.groupId}
+    provider: fabric8

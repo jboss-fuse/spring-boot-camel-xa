@@ -1,0 +1,10 @@
+apiVersion: "v1"
+kind: "RoleBinding"
+metadata:
+  name: "${project.artifactId}"
+roleRef:
+  # Add the edit role to the service account
+  name: "edit"
+subjects:
+  - kind: "ServiceAccount"
+    name: "${project.artifactId}"
