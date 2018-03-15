@@ -8,7 +8,7 @@ spec:
       containers:
       - env:
         - name: CLUSTER_RECOVERY_ENABLED
-        - value: true
+          value: true
         - name: CLUSTER_BASE_DIR
           value: /var/transaction/data
         - name: CLUSTER_NODENAME
@@ -19,9 +19,9 @@ spec:
         volumeMounts:
         - mountPath: /var/transaction/data
           name: ${project.artifactId}-data
-      serviceAccountName: spring-boot-camel-xa
+      serviceAccountName: ${project.artifactId}
       terminationGracePeriodSeconds: 180
       volumes:
       - name: ${project.artifactId}-data
         persistentVolumeClaim:
-          claimName: camel-transaction-log-pvc
+          claimName: spring-boot-camel-xa

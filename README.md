@@ -1,6 +1,6 @@
 # Spring-Boot Camel XA Transactions Quickstart
 
-This example demonstrates how to run a Camel Service on Spring-Boot that supports XA transactions on two external transactional resources: a JMS resource (ActiveMQ) and a database (PostgreSQL).
+This example demonstrates how to run a Camel Service on Spring-Boot that supports XA transactions on two external transactional resources: a JMS resource (A-MQ) and a database (PostgreSQL).
 
 External resources can be provided by Openshift and must be started before running this quickstart.  
 
@@ -9,6 +9,13 @@ require a `PersistentVolume` to store transaction logs.
 
 The application **supports scaling** on the `StatefulSet` resource. Each instance will have its own "in process" recovery manager.
 
+A special controller guarantees that when the application is scaled down, all instances that are terminated complete correctly all their work without
+leaving pending transactions. The scale-down operation is rolled back by the controller if the recovery manager has not been
+able to flush all pending work before terminating.
+
+In order for the recovery controller to work, `edit` permissions on the current namespace are required (role binding is included in the set of resources published to Openshift).
+The recovery controller can be disabled using the `CLUSTER_RECOVERY_ENABLED` environment variable: in that case, no special permissions are required on the service account but 
+any scale-down operation may leave pending transactions on the terminated pod without notice. 
 
 All commands below requires one of these:
 - be logged in to the targeted OpenShift instance (using oc login command line tool for instance)
@@ -68,6 +75,10 @@ Create a persistent volume claim for the transaction log:
 Build and deploy your booster:
 
     mvn clean -DskipTests fabric8:deploy -Popenshift -Dfabric8.generator.fromMode=istag -Dfabric8.generator.from=MY_PROJECT_NAME/fis-java-openshift:2.0
+
+Scale it up to the desired number of replicas:
+
+    oc scale statefulset spring-boot-camel-xa --replicas 3
 
 ### Using the Quickstart
 
