@@ -134,21 +134,3 @@ curl -w "\n" http://$NARAYANA_HOST/api/
 This message produces an exception at the end of the route, so that the transaction is always rolled back.
 
 You should **not** find any trace of the message in the `audit_log` table.
-
-#### Unsafe system crash
-
-Send a message named `killBeforeCommit`:
-
-```
-curl -w "\n" -X POST http://$NARAYANA_HOST/api/?entry=killBeforeCommit
-# wait a bit (the pod should be restarted)
-curl -w "\n" http://$NARAYANA_HOST/api/
-```
-
-This message produces a **immediate crash after the first phase of the 2pc protocol and before the final commit**.
-The message **must not** be processed again, but the transaction manager was not able to send a confirmation to all resources.
-If you check the `audit_log` table in the database while the application is down, you'll not find any trace of the message (it will appear later).
-
-After **the pod is restarted** by Openshift, the **recovery manager will recover all pending transactions by communicating with the participating resources** (database and JMS broker).
-
-When the recovery manager has finished processing failed transactions, you should find **two log records** in the `audit_log` table: `killBeforeCommit`, `killBeforeCommit-ok`.

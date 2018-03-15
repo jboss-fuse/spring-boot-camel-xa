@@ -19,7 +19,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.rest.RestParamType;
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class CamelRoutes extends RouteBuilder {
 
@@ -45,11 +44,6 @@ public class CamelRoutes extends RouteBuilder {
                 .transform().simple("${body}")
                 .log("Processing {message} = ${body}")
                 .setHeader("message", body())
-                .choice()
-                    .when(body().startsWith("killBeforeCommit"))
-                        .log("The system will be killed right after the first phase of 2pc and before the final commit")
-                        .bean("crashManager", "killBeforeCommit")
-                .end()
                 .to("sql:insert into audit_log (message) values (:#message)")
                 .to("jms:outbound?disableReplyTo=true")
                 .choice()
