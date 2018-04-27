@@ -54,10 +54,6 @@ Log in and create your project:
     oc login -u developer -p developer
     oc new-project MY_PROJECT_NAME
 
-Import base images in your newly created project (MY_PROJECT_NAME):
-
-    oc import-image fis-java-openshift:2.0 --from=registry.access.redhat.com/jboss-fuse-6/fis-java-openshift:2.0 --confirm
-
 Install dependencies:
 - From the Openshift catalog install `postgresql` using `theuser` as username and `Thepassword1!` as password
 - From the Openshift catalog install a `A-MQ` broker using `theuser` as username and `Thepassword1!` as password
@@ -74,7 +70,7 @@ Create a persistent volume claim for the transaction log:
 
 Build and deploy your booster:
 
-    mvn clean -DskipTests fabric8:deploy -Popenshift -Dfabric8.generator.fromMode=istag -Dfabric8.generator.from=MY_PROJECT_NAME/fis-java-openshift:2.0
+    mvn clean fabric8:deploy -Popenshift
 
 Scale it up to the desired number of replicas:
 
