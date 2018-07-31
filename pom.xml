@@ -32,32 +32,24 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <snowdrop-narayana.version>1.0.0</snowdrop-narayana.version>
-        <spring-boot.version>1.5.11.RELEASE</spring-boot.version>
+        <!-- configure the Fuse version you want to use here -->
+        <fuse.version>7.0.1.fuse-000008-redhat-4</fuse.version>
+        <postgresql.version>9.4.1212.jre7</postgresql.version>
 
-        <!-- versions of Maven plugins -->
-        <fabric8-maven-plugin.version>3.5.38</fabric8-maven-plugin.version>
+        <snowdrop-narayana.version>1.0.0</snowdrop-narayana.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <!--  TODO: not needed when fabric8 bom will upgrade the spring-boot version -->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
+                <groupId>org.jboss.redhat-fuse</groupId>
+                <artifactId>fuse-springboot-bom</artifactId>
+                <version>${fuse.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- TODO: remove above -->
 
-            <dependency>
-                <groupId>io.fabric8</groupId>
-                <artifactId>fabric8-project-bom-camel-spring-boot</artifactId>
-                <version>3.0.11</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+            <!-- Following dependencies will be added to Fuse BOM in next releases -->
             <dependency>
                 <groupId>me.snowdrop</groupId>
                 <artifactId>narayana-spring-boot-starter</artifactId>
@@ -120,6 +112,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.activemq</groupId>
@@ -155,9 +148,9 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
+                <groupId>org.jboss.redhat-fuse</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
+                <version>${fuse.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -175,9 +168,9 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>io.fabric8</groupId>
+                        <groupId>org.jboss.redhat-fuse</groupId>
                         <artifactId>fabric8-maven-plugin</artifactId>
-                        <version>${fabric8-maven-plugin.version}</version>
+                        <version>${fuse.version}</version>
                         <executions>
                             <execution>
                                 <goals>
