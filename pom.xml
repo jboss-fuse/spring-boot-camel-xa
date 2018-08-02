@@ -23,7 +23,7 @@
 
     <groupId>com.redhat.fuse.quickstarts</groupId>
     <artifactId>spring-boot-camel-xa</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0.fuse-000004</version>
 
     <name>JBoss Fuse :: Quickstarts :: Spring-Boot :: Camel XA</name>
     <description>Spring Boot example using XA transactions</description>
