@@ -33,10 +33,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- configure the Fuse version you want to use here -->
-        <fuse.version>7.0.1.fuse-000008-redhat-4</fuse.version>
-        <postgresql.version>9.4.1212.jre7</postgresql.version>
-
-        <snowdrop-narayana.version>1.0.0</snowdrop-narayana.version>
+        <fuse.version>7.2.0-SNAPSHOT</fuse.version>
     </properties>
 
     <dependencyManagement>
@@ -47,18 +44,6 @@
                 <version>${fuse.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <!-- Following dependencies will be added to Fuse BOM in next releases -->
-            <dependency>
-                <groupId>me.snowdrop</groupId>
-                <artifactId>narayana-spring-boot-starter</artifactId>
-                <version>${snowdrop-narayana.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.snowdrop</groupId>
-                <artifactId>narayana-spring-boot-recovery-controller</artifactId>
-                <version>${snowdrop-narayana.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -110,15 +95,14 @@
         </dependency>
 
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-client</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
 
     </dependencies>
 
