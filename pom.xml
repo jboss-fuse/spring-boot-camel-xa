@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-     Copyright 2005-2016 Red Hat, Inc.
+     Copyright 2005-2018 Red Hat, Inc.
 
      Red Hat licenses this file to you under the Apache License, version
      2.0 (the "License"); you may not use this file except in compliance
@@ -34,6 +34,8 @@
 
         <!-- configure the Fuse version you want to use here -->
         <fuse.version>7.3.0-SNAPSHOT</fuse.version>
+
+        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -139,6 +141,19 @@
                     <execution>
                         <goals>
                             <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
                         </goals>
                     </execution>
                 </executions>
