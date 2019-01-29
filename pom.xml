@@ -33,7 +33,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- configure the Fuse version you want to use here -->
-        <fuse.version>7.3.0-SNAPSHOT</fuse.version>
+        <fuse.version>7.3.0.fuse-730022</fuse.version>
 
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
     </properties>
@@ -181,6 +181,29 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <profile>
+            <id>java9-plus</id>
+            <activation>
+                <jdk>[9,)</jdk>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sun.activation</groupId>
+                    <artifactId>javax.activation</artifactId>
+                    <version>1.2.0</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.springframework.hateoas</groupId>
+                    <artifactId>spring-hateoas</artifactId>
+                    <version>0.25.0.RELEASE</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.springframework.plugin</groupId>
+                    <artifactId>spring-plugin-core</artifactId>
+                    <version>1.2.0.RELEASE</version>
+                </dependency>
+            </dependencies>
         </profile>
     </profiles>
 </project>
