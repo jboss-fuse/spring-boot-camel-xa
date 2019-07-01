@@ -33,7 +33,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- configure the Fuse version you want to use here -->
-        <fuse.version>7.4.0.fuse-740017</fuse.version>
+        <fuse.bom.version>7.4.0.fuse-740017</fuse.bom.version>
 
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
     </properties>
@@ -43,7 +43,7 @@
             <dependency>
                 <groupId>org.jboss.redhat-fuse</groupId>
                 <artifactId>fuse-springboot-bom</artifactId>
-                <version>${fuse.version}</version>
+                <version>${fuse.bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -145,7 +145,7 @@
             <plugin>
                 <groupId>org.jboss.redhat-fuse</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${fuse.version}</version>
+                <version>${fuse.bom.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -165,7 +165,7 @@
                     <plugin>
                         <groupId>org.jboss.redhat-fuse</groupId>
                         <artifactId>fabric8-maven-plugin</artifactId>
-                        <version>${fuse.version}</version>
+                        <version>${fuse.bom.version}</version>
                         <executions>
                             <execution>
                                 <goals>
