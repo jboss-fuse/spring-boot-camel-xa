@@ -16,14 +16,13 @@
      permissions and limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.redhat.fuse.quickstarts</groupId>
     <artifactId>spring-boot-camel-xa</artifactId>
-    <version>1.0.0.fuse-750020</version>
+    <version>1.0.0.fuse-750020-redhat-00005</version>
 
     <name>JBoss Fuse :: Quickstarts :: Spring-Boot :: Camel XA</name>
     <description>Spring Boot example using XA transactions</description>
@@ -33,7 +32,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- configure the Fuse version you want to use here -->
-        <fuse.version>7.5.0.fuse-750029</fuse.version>
+        <fuse.version>7.5.0.fuse-750029-redhat-00002</fuse.version>
 
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
     </properties>
@@ -154,6 +153,20 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+        <groupId>org.commonjava.maven.plugins</groupId>
+        <artifactId>project-sources-maven-plugin</artifactId>
+        <version>1.0</version>
+        <executions>
+          <execution>
+            <id>project-sources-archive</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>archive</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
         </plugins>
     </build>
 
@@ -203,3 +216,7 @@
         </profile>
     </profiles>
 </project>
+<!--
+Modified by POM Manipulation Extension for Maven 3.8.1 ( SHA: 24b97b2e ) 
+-->
+
