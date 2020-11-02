@@ -70,7 +70,7 @@ Create a persistent volume claim for the transaction log:
 
 Build and deploy your booster:
 
-    mvn clean fabric8:deploy -Popenshift
+    mvn clean oc:deploy -Popenshift
 
 Scale it up to the desired number of replicas:
 
