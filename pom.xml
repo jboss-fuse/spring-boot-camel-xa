@@ -33,7 +33,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- configure the Fuse version you want to use here -->
-        <fuse.bom.version>7.9.0.fuse-sb2-790004</fuse.bom.version>
+        <fuse.bom.version>7.9.0.fuse-sb2-790005</fuse.bom.version>
         <docker.image.version>1.9</docker.image.version>
 
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
@@ -179,6 +179,34 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <resources>
+                                <labels>
+                                  <pod>
+                                    <property>
+                                      <name>com.company</name>
+                                      <value>Red_Hat</value>
+                                    </property>
+                                    <property>
+                                      <name>rht.prod_name</name>
+                                      <value>Red_Hat_Integration</value>
+                                    </property>
+                                    <property>
+                                      <name>rht.prod_ver</name>
+                                      <value>7.9</value>
+                                    </property>
+                                    <property>
+                                      <name>rht.comp</name>
+                                      <value>spring-boot-camel-xa</value>
+                                    </property>
+                                    <property>
+                                      <name>rht.comp_ver</name>
+                                      <value>${fuse.bom.version}</value>
+                                    </property>
+                                  </pod>
+                                </labels>
+                              </resources>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
