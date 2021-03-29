@@ -1,0 +1,11 @@
+kind: "RoleBinding"
+apiVersion: "rbac.authorization.k8s.io/v1"
+metadata:
+  name: "pods-reader-rolebinding"
+roleRef:
+  # Add the "pods-reader" role to the service account
+  kind: "Role"
+  name: "pods-reader"
+subjects:
+  - kind: "ServiceAccount"
+    name: "@project.artifactId@"
