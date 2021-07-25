@@ -16,14 +16,13 @@
      permissions and limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.redhat.fuse.quickstarts</groupId>
     <artifactId>spring-boot-camel-xa</artifactId>
-    <version>7.9.0.fuse-sb2-790054</version>
+    <version>7.9.0.fuse-sb2-790054-redhat-00001</version>
 
     <name>JBoss Fuse :: Quickstarts :: Spring-Boot :: Camel XA</name>
     <description>Spring Boot example using XA transactions</description>
@@ -222,3 +221,6 @@
         </profile>
     </profiles>
 </project>
+<!--
+Modified by POM Manipulation Extension for Maven 4.4 ( SHA: 02f85b8f )
+-->
