@@ -33,7 +33,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <snowdrop-narayana.version>1.0.0</snowdrop-narayana.version>
-        <spring-boot.version>1.5.11.RELEASE</spring-boot.version>
+        <spring-boot.version>2.7.1</spring-boot.version>
 
         <!-- versions of Maven plugins -->
         <fabric8-maven-plugin.version>3.5.38</fabric8-maven-plugin.version>
@@ -41,7 +41,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!--  TODO: not needed when fabric8 bom will upgrade the spring-boot version -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -49,25 +48,24 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- TODO: remove above -->
 
             <dependency>
-                <groupId>io.fabric8</groupId>
-                <artifactId>fabric8-project-bom-camel-spring-boot</artifactId>
-                <version>3.0.11</version>
+                <groupId>org.apache.camel.springboot</groupId>
+                <artifactId>camel-spring-boot-dependencies</artifactId>
+                <version>3.14.4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>me.snowdrop</groupId>
-                <artifactId>narayana-spring-boot-starter</artifactId>
-                <version>${snowdrop-narayana.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>me.snowdrop</groupId>
-                <artifactId>narayana-spring-boot-recovery-controller</artifactId>
-                <version>${snowdrop-narayana.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>me.snowdrop</groupId>-->
+<!--                <artifactId>narayana-spring-boot-starter</artifactId>-->
+<!--                <version>${snowdrop-narayana.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>me.snowdrop</groupId>-->
+<!--                <artifactId>narayana-spring-boot-recovery-controller</artifactId>-->
+<!--                <version>${snowdrop-narayana.version}</version>-->
+<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
 
@@ -92,28 +90,24 @@
         </dependency>
 
         <dependency>
-            <groupId>me.snowdrop</groupId>
-            <artifactId>narayana-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>me.snowdrop</groupId>
-            <artifactId>narayana-spring-boot-recovery-controller</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jta-atomikos</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-servlet-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-sql-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
+            <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-jms-starter</artifactId>
         </dependency>
 
@@ -125,8 +119,6 @@
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-client</artifactId>
         </dependency>
-
-
     </dependencies>
 
     <build>

@@ -24,7 +24,7 @@ public class CamelRoutes extends RouteBuilder {
 
     public void configure() {
 
-        restConfiguration().contextPath("/api");
+        restConfiguration().component("servlet").contextPath("/api");
 
         rest().get("/")
                 .produces("text/plain")

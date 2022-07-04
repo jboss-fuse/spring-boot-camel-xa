@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres
+    command:
+      - "postgres"
+      - "-c"
+      - "max_prepared_transactions=10"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./src/main/resources/schema.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: psql postgres --command "select 1" -U postgres
+    environment:
+      POSTGRES_USER: "theuser"
+      POSTGRES_PASSWORD: "Thepassword1!"
+      POSTGRES_DB: sampledb
+
+  amq-broker:
+    image: registry.redhat.io/amq7/amq-broker:latest
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+    environment:
+      AMQ_USER: "theuser"
+      AMQ_PASSWORD: "Thepassword1!"
