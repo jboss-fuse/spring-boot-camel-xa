@@ -16,3 +16,7 @@ buildNumber.properties
 
 .project
 .metadata
+
+.odo
+
+.odo/odo-file-index.json

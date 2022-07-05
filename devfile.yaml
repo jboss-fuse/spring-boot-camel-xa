@@ -1,0 +1,103 @@
+schemaVersion: 2.1.0
+metadata:
+  name: csb-ubi8
+  version: 0.0.1
+  displayName: CSB Java ubi8
+  description: CSB and ubi8 image
+  icon: https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/java-maven.jpg
+  tags: ['Java', 'Spring', 'Camel']
+  projectType: 'spring'
+  language: 'java'
+attributes:
+  controller.devfile.io/storage-type: ephemeral
+  controller.devfile.io/scc: container-build
+components:
+  - name: tools
+    container:
+      image: registry.access.redhat.com/ubi8/openjdk-11
+      mountSources: true
+      endpoints:
+        - name: http-8080
+          exposure: public
+          targetPort: 8080
+      volumeMounts:
+        - name: txdata
+          path: /deployments/target
+  - name: txdata
+    volume:
+      size: 1Gi
+  - name: amq-broker
+    container:
+      image: registry.redhat.io/amq7/amq-broker:latest
+      env:
+        - name: AMQ_USER
+          value: theuser
+        - name: AMQ_PASSWORD
+          value: Thepassword1!
+        - name: AMQ_REQUIRE_LOGIN
+          value: "true"
+      endpoints:
+        - name: amq-broker-console
+          targetPort: 8161
+          exposure: public
+  - name: postgres
+    container:
+      image: registry.redhat.io/rhel8/postgresql-10
+      env:
+        - name: POSTGRESQL_USER
+          value: theuser
+        - name: POSTGRESQL_PASSWORD
+          value: Thepassword1!
+        - name: POSTGRESQL_DATABASE
+          value: sampledb
+        - name: POSTGRESQL_MAX_PREPARED_TRANSACTIONS
+          value: "10"
+commands:
+  - id: init-db
+    exec:
+      component: postgres
+      commandLine: |
+        psql -d ${POSTGRESQL_DATABASE} -f ${PROJECT_SOURCE}/src/main/resources/schema.sql
+        psql -d ${POSTGRESQL_DATABASE} -c "GRANT ALL PRIVILEGES ON audit_log TO ${POSTGRESQL_USER}"
+        psql -d ${POSTGRESQL_DATABASE} -c "GRANT ALL PRIVILEGES ON audit_log_audit_id_seq TO ${POSTGRESQL_USER}"
+      group:
+        kind: build
+        isDefault: false
+      workingDir: $PROJECT_SOURCE
+  - id: init-compile
+    exec:
+      component: tools
+      commandLine: |
+        source /opt/jboss/container/maven/default/maven.sh && maven_init
+        mvn package -s /home/jboss/.m2/settings.xml -f ${PROJECT_SOURCE}/pom.xml -DskipTests
+        cp ${PROJECT_SOURCE}/target/*.jar /deployments
+      group:
+        kind: build
+        isDefault: true
+      workingDir: $PROJECT_SOURCE
+  - id: dev-run
+    exec:
+      component: tools
+      commandLine: '/usr/local/s2i/run'
+      hotReloadCapable: false
+      group:
+        kind: run
+        isDefault: true
+      workingDir: $PROJECTS_ROOT
+  - id: dev-debug
+    exec:
+      component: tools
+      commandLine: '/usr/local/s2i/run'
+      hotReloadCapable: false
+      env:
+        - name: JAVA_DEBUG
+          value: 'true'
+        - name: JAVA_DEBUG_PORT
+          value: ${DEBUG_PORT}
+      group:
+        kind: debug
+        isDefault: true
+      workingDir: $PROJECTS_ROOT
+events:
+  postStart:
+    - init-db
