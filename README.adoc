@@ -1,4 +1,4 @@
-# Spring-Boot Camel XA Transactions Quickstart
+## Spring-Boot Camel XA Transactions Quickstart#
 
 This example demonstrates how to run a Camel Service on Spring-Boot that supports XA transactions on two external transactional resources: a JMS resource (A-MQ) and a database (PostgreSQL).
 
@@ -61,7 +61,7 @@ Install dependencies:
 Change the Postgresql database to accept prepared statements:
 
     
-    oc env dc/postgresql POSTGRESQL_MAX_PREPARED_TRANSACTIONS=100
+    oc set env dc/postgresql POSTGRESQL_MAX_PREPARED_TRANSACTIONS=100
 
 
 Create a persistent volume claim for the transaction log:
